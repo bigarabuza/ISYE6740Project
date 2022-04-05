@@ -1,0 +1,27 @@
+SELECT
+	dt_rcvd,
+	count(*)
+FROM
+	(
+	SELECT
+		steamid,
+		appid,
+		playtime_forever,
+		DATE(dateretrieved) AS dt_rcvd
+	FROM
+		games_daily gd
+	WHERE
+		NOT EXISTS (
+		SELECT
+			steamid,
+			appid,
+			playtime_forever,
+			dateretrieved
+		FROM
+			games_daily gd2
+		WHERE
+			gd2.steamid = gd.steamid
+			AND gd2.appid = gd.appid
+			AND gd2.dateretrieved > gd.dateretrieved )) AS t
+GROUP BY
+	dt_rcvd
