@@ -4,7 +4,6 @@ from sklearn.neighbors import NearestNeighbors
 
 #%%
 #Read The Data
-
 game_ratings = pd.read_csv('games_rating.csv')
 user_ratings = pd.read_csv('usergamesrating.csv')
 game_ratings['genre'] = game_ratings.genre.astype('category')
@@ -12,7 +11,7 @@ game_ratings['genre'] = game_ratings.genre.astype('category')
 #Get User IDs
 user_data = user_ratings['steamid'].unique()
 
-#%%
+#%% 
 #Dummy Variables for Genre
 game_genres = game_ratings['genre'].unique().tolist()
 del game_genres[12]
